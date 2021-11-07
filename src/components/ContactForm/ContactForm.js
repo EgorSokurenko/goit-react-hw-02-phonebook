@@ -1,5 +1,5 @@
 import { Component } from "react";
-import propTypes from "prop-types";
+import propTypes, { number } from "prop-types";
 import "./ContactForm.css";
 export default class ContactForm extends Component {
   state = {
@@ -7,13 +7,15 @@ export default class ContactForm extends Component {
     number: "",
   };
   handleChange = (e) => {
+    const { name, value } = e.currentTarget;
     this.setState({
-      [e.currentTarget.name]: e.currentTarget.value,
+      [name]: value,
     });
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addContact(this.state.name, this.state.number);
+    const { name, number } = this.state;
+    this.props.addContact(name, number);
     this.setState({
       name: "",
       number: "",
