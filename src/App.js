@@ -14,13 +14,18 @@ class App extends Component {
     ],
     filter: "",
   };
+  onDeliteContact = (id) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter((contact) => contact.id !== id),
+    }));
+  };
   onFilter = (e) => {
     this.setState({
       filter: e.currentTarget.value,
     });
   };
   addContact = (name, number) => {
-    if (this.state.contacts.filter((contact) => contact.name === name)) {
+    if (this.state.contacts.find((contact) => contact.name === name)) {
       alert(`${name} is already in contacts`);
       return;
     }
@@ -48,7 +53,10 @@ class App extends Component {
         <ContactForm addContact={this.addContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.onFilter} />
-        <ContactList contacts={visibleContacts} />
+        <ContactList
+          contacts={visibleContacts}
+          onDeliteContact={this.onDeliteContact}
+        />
       </div>
     );
   }

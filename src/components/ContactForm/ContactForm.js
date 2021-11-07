@@ -1,6 +1,7 @@
 import { Component } from "react";
-
-export default class ContactFrom extends Component {
+import propTypes from "prop-types";
+import "./ContactForm.css";
+export default class ContactForm extends Component {
   state = {
     name: "",
     number: "",
@@ -21,10 +22,12 @@ export default class ContactFrom extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form className="contactForm" onSubmit={this.handleSubmit}>
+        <label className="form__label">
           Name
           <input
+            placeholder="Введите имя"
+            className="form__input"
             onChange={this.handleChange}
             value={name}
             type="text"
@@ -35,9 +38,11 @@ export default class ContactFrom extends Component {
           />
         </label>
         <br />
-        <label>
+        <label className="form__label">
           Number
           <input
+            placeholder="Введите номер"
+            className="form__input"
             onChange={this.handleChange}
             value={number}
             type="tel"
@@ -48,8 +53,13 @@ export default class ContactFrom extends Component {
           />
         </label>
         <br />
-        <button type="submit">Add Contact</button>
+        <button className="form__button" type="submit">
+          Add Contact
+        </button>
       </form>
     );
   }
 }
+ContactForm.propTypes = {
+  addContact: propTypes.func,
+};
